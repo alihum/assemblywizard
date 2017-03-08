@@ -125,6 +125,7 @@ class RestrictionEnzyme:
                      + "."*len(self.cutsite) \
                      + complement[rs[i]-5-cutlength:rs[i]-cutlength]
                      count = count + 1
+                     
     # prints the overhang that is produced from a restriction enzyme
     def overhang(self):
         print self.cutsite[:self.cutindex] + "      " \
@@ -132,12 +133,13 @@ class RestrictionEnzyme:
         print self.reverse_cutsite[:self.cutsite_length-self.cutindex] \
         + "      " + self.reverse_cutsite[self.cutindex]
 
-# Place to store restriction enzymes
+# Dictionary to store restriction enzymes
 # They are inserted in the format (Name,Recognition Sequence,CutIndex)
 # The cut index is the number of the base immediately before where
-# restriction occurs e.g. G AATTC is an index of 1 | GC GGCCGC = 2
+# restriction occurs e.g. G AATTC has an index of 1 | GC GGCCGC = 2
 # User defined restriction enzymes can be stored here
 renz = {
+"new":(),
 "EcoRI":("EcoRI","GAATTC",1),
 "NotI":("NotI","GCGGCCGC",2),
 "NheI":("NheI","GCTAGC",1),
@@ -147,31 +149,52 @@ renz = {
 "XbaI":("XbaI","TCTAGA",1),
 }
 
+#Command-line argument parser so the program can be run from the linux shell
 parser = argparse.ArgumentParser(description="PySlice is a program for "\
 + "manipulating nucelotide sequences with restriciton enzymes")
 
+#The first two arguments are positional arguments which take the file and the
+# restriction enzyme to be used
 parser.add_argument('filename',
     help="Insert name of fasta file - must be in same directory" )
-    
-parser.add_argument('restrictionenzyme',choices=renz.keys(),
-    help="Choose the restriction enzyme to use")
-    
-parser.add_argument('-d',action='store_true')
+#The restriction enzyme can be one of the preset ones or "new" which allows 
+    #user to define their own enzyme
+parser.add_argument('enzyme',choices=renz.keys(),
+    help="Choose the restriction enzyme to use")    
+#This adds an option to run a digest on the sequence
+parser.add_argument('-d',action='store_true',
+    help="Run a digest on sequence")
+    #This adds an option to print the locations of the recognition sequences
+parser.add_argument('-r',action='store_true',
+    help="Print the locations of restriction fragments")
 
-parser.add_argument('-r',action='store_true')
-
+#This piece of code parses the file using SeqIO
 args = parser.parse_args()
 file = args.filename
 seq = SeqIO.read(file,"fasta")
 seq = seq.seq
 
-re = args.restrictionenzyme
-x = RestrictionEnzyme(renz[re][0],renz[re][1],renz[re][2])   
+#The if clause checks to see if the user wants to use a pre-defined enzyme
+# or a new enzyme by looking for "new" in the enzyme argument
+if args.enzyme == "new":
+    #set of raw_input statements asks for user input to create an instance
+    # the RestrictionEnzyme class based on their input
+    name = raw_input("Type enzyme name (e.g. 'EcoRI'):")
+    recognition = raw_input("Type recognition sequence (e.g. 'GAATTC'):")
+    cutindex = int(raw_input("Type cut index (e.g. 1):"))
+    x = RestrictionEnzyme(name,recognition,cutindex)
+else:
+    #if a pre-defined enzyme is desired this else clause creates an instance
+    #of the RestrictionEnzyme class based on the renz dictionary which
+    #stores pre-defined restriction enzymes    
+    re = args.e
+    x = RestrictionEnzyme(renz[re][0],renz[re][1],renz[re][2])   
 
+# when the -d option is selected this prints the restriction fragments
+# function
 if args.d:
     print x.restrictionfragments(seq)
-    
+
+# when the -r option is selected this prints the recognition sites function        
 if args.r:
     print x.printrecognitionsites(seq)
-
-            
