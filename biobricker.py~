@@ -45,19 +45,14 @@ class Sequence:
             return dbb
         else: print "Not a BioBrick"
 
-# this block parses the arguments and puts the file into a readable format
 args = parser.parse_args()
 filename = args.filename
 seq = SeqIO.read(filename,"fasta")
 seq = seq.seq
 sequence=Sequence(seq)
 
-# this detects the -b (BioBrick) option being selected and prints the
-# BioBrick function
 if args.b:
     print sequence.biobrick()
-# this detects the -d (deBioBrick) option being selected and prints the
-# deBioBrick function
 if args.d:
     print sequence.debiobrick()
 

@@ -31,7 +31,6 @@ DF = last_40
 # than downstream forward oligo
 DR = "GGC" + seq.seq[3-len(DF):].reverse_complement()
 
-# Print statements to graphically display the oligonucleotide sequences
 print "\nThese are the oligonucleotide sequences that will make up the half"+ \
 "-clips based on the 'Paper-Clip' method of DNA assembly" + \
 " (https://doi.org/10.1093/nar/gku829)\n"

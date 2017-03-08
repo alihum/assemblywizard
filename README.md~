@@ -9,9 +9,7 @@ The 3 programs are:
 
 They are all designed to be run in the linux terminal.
 
-_______
 PySlice
-_______
 
 PySlice is designed to import a sequence as a fasta file and run a restriction digest on it with either a pre-defined or user defined restriction enzyme.
 
@@ -30,10 +28,3 @@ e.g. EcoRI, G  | A A T T C - the cut index is 1
 
            1 2 3 4 5   6
 e.g. PstI, C T G C A | G - the cut index is 5
-
-__________
-biobricker
-__________
-
-
-biobricker is a script for producing biobricks from DNA sequences and converting biobricks to normal DNA sequences
