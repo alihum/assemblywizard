@@ -6,7 +6,7 @@ Created on Sat Mar  4 13:24:11 2017
 """
 # Imports necessary modules "sys" for dealing with command line arguments
 # "SeqIO" for reading a fasta sequence file
-import sys
+import argparse
 from Bio import SeqIO
 
 # makes a restriction enzyme class
@@ -137,50 +137,41 @@ class RestrictionEnzyme:
 # The cut index is the number of the base immediately before where
 # restriction occurs e.g. G AATTC is an index of 1 | GC GGCCGC = 2
 # User defined restriction enzymes can be stored here
-EcoRI = RestrictionEnzyme("EcoRI","GAATTC",1)
-NotI = RestrictionEnzyme("NotI","GCGGCCGC",2)
-NheI = RestrictionEnzyme("NheI","GCTAGC",1)
-PstI = RestrictionEnzyme("PstI","CTGCAG",5)
-SpeI = RestrictionEnzyme("SpeI","ACTAGT",1)
-EcoRV = RestrictionEnzyme("EcoRV","GATATC",3)
-XbaI = RestrictionEnzyme("XbaI","TCTAGA",1)
+renz = {
+"EcoRI":("EcoRI","GAATTC",1),
+"NotI":("NotI","GCGGCCGC",2),
+"NheI":("NheI","GCTAGC",1),
+"PstI":("PstI","CTGCAG",5),
+"SpeI":("SpeI","ACTAGT",1),
+"EcoRV":("EcoRV","GATATC",3),
+"XbaI":("XbaI","TCTAGA",1),
+}
 
+parser = argparse.ArgumentParser(description="PySlice is a program for "\
++ "manipulating nucelotide sequences with restriciton enzymes")
 
-# reads the file which should be the second argument in the command line
-# file should also be in the same directory as program
-try:
-    file = sys.argv[1]
-    seq = SeqIO.read(file,"fasta")
-    seq = seq.seq
-    # Detects the "digest" options in the command line and executes this
-    if sys.argv[2]=="digest":
-    # Gives user the option to input their own restriction enzyme or use of the
-    # built in ones    
-        if raw_input("Use own restriction enzyme? Y/N : ") == "Y":
-            x = raw_input("Type the name of restriction enzyme: ")
-            y = raw_input("Type recognition sequence: ")
-            z = int(raw_input("Type cut index: "))
-            re = RestrictionEnzyme(x,y,z)
-            print re.restrictionfragments(seq)
-        else:
-            x = raw_input("Type the name of a restriction enzyme (e.g. EcoRI): ")
-            if x == "EcoRI":
-                print EcoRI.restrictionfragments(seq)
-            elif x == "NotI":
-                print NotI.restrictionfragments(seq)
-            elif x == "NheI":
-                print NheI.restrictionfragments(seq)
-            elif x == "PstI":
-                print PstI.restrictionfragments(seq)
-            elif x == "SpeI":
-                print SpeI.restrictionfragments(seq)
-            elif x == "EcoRV":
-                print EcoRV.restrictionfragments(seq)
-            elif x == "XbaI":
-                print XbaI.restrictionfragments(seq)
-                
-except IndexError:
-    print "Running in shell"
+parser.add_argument('filename',
+    help="Insert name of fasta file - must be in same directory" )
+    
+parser.add_argument('restrictionenzyme',choices=renz.keys(),
+    help="Choose the restriction enzyme to use")
+    
+parser.add_argument('-d',action='store_true')
 
+parser.add_argument('-r',action='store_true')
+
+args = parser.parse_args()
+file = args.filename
+seq = SeqIO.read(file,"fasta")
+seq = seq.seq
+
+re = args.restrictionenzyme
+x = RestrictionEnzyme(renz[re][0],renz[re][1],renz[re][2])   
+
+if args.d:
+    print x.restrictionfragments(seq)
+    
+if args.r:
+    print x.printrecognitionsites(seq)
 
             
