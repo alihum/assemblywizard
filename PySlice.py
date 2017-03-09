@@ -187,7 +187,7 @@ else:
     #if a pre-defined enzyme is desired this else clause creates an instance
     #of the RestrictionEnzyme class based on the renz dictionary which
     #stores pre-defined restriction enzymes    
-    re = args.e
+    re = args.enzyme
     x = RestrictionEnzyme(renz[re][0],renz[re][1],renz[re][2])   
 
 # when the -d option is selected this prints the restriction fragments
