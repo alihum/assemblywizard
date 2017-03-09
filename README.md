@@ -9,9 +9,7 @@ The 3 programs are:
 
 They are all designed to be run in the linux terminal.
 ##Code Example
-_______
-PySlice
-_______
+###PySlice
 
 PySlice is designed to import a sequence as a fasta file and run a restriction digest on it with either a pre-defined or user defined restriction enzyme. This is useful for looking at the sticky ends produced in each fragment. It also tells you the strand length so DNA examples can be identified using gel electrophoresis.
 
@@ -31,6 +29,7 @@ If you type "new" you will be asked for the name of the enzyme, the recognition 
 
 
 e.g. EcoRI, G  | A A T T C - the cut index is 1
+
 e.g. PstI, C T G C A | G - the cut index is 5
 
 The options in the command line are:
@@ -57,10 +56,8 @@ python PySlice.py RestrictionExample.fasta new -d
 The terminal will prompt you to input the information for a new enzyme.
 
 New enzymes can be manually added to 'renz' dictionary on line 141 in the format `"key":"enzymename","recognitionsequence",cutindex`. This is useful if you are using an enzyme repeatedly.
-__________
-biobricker
-__________
 
+###biobricker
 
 biobricker is a script for producing biobricks from DNA sequences and converting biobricks to normal DNA sequences. It is based on the RFC10 recommendation from the BioBrick Foundation for making universally compatible DNA parts. More information can be found at: [http://parts.igem.org/Help:Standards/Assembly/RFC10]
 
@@ -96,9 +93,8 @@ python biobricker.py biobrick.fasta -d
 
 This ouputs the sequence without the prefix and suffix.
 
-____________
-paperclipper
-____________
+###paperclipper
+
 paperclipper is a script for working out the oligonucleotides needed for performing a PaperClip assembly. PaperClip assembly is an assembly method designed by Trubitsyna et al. for the rapid assembly of DNA libraries. Oligonucleotides are required for each part to make clips which join the parts together in any order. More information about the process is avaiable at: [https://doi.org/10.1093/nar/gku829]. This tool is designed to speed up the process of making the olignucleotides.
 
 The program is run in the linux terminal by writing python before it:
