@@ -1,18 +1,41 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
 """
-Created on Sun Mar  5 15:58:20 2017
+paperclipper is a script for working out the oligonucleotides needed for\
+ performing a PaperClip assembly. PaperClip assembly is an assembly method \
+ designed by Trubitsyna et al. for the rapid assembly of DNA libraries. \
+ Oligonucleotides are required for each part to make clips which join the \
+ parts together in any order. More information about the process is avaiable \
+ at: [https://doi.org/10.1093/nar/gku829]. This tool is designed to speed up\
+ the process of making the olignucleotides.
 
-@author: ali
+The program is run in the linux terminal by writing python before it:
+
+The command should be typed as:
+
+python paperclipper.py <filename>
+
+The file must be a fasta file.
+
+This outputs the sequences for the oligonucleotides.
+
+Example:
+
+To produce the oligonucleotides for a sequence we will use the\
+ "rhodopsin.fasta" file. To do this type:
+python paperclipper.py rhodopsin.fasta
+
+The output prints the oligonucleotides that need to be produced.\
+ It also shows what the half clips will look like once the four\
+ olignucleotides are annealed.
+
 """
 
 import sys
 from Bio import SeqIO
-#
+
 fasta_file = sys.argv[1]
 
 seq = SeqIO.read(fasta_file,"fasta")
-#
-seq = SeqIO.read("id120009419.seq","fasta")
 
 # Makes upstream forward oligonucleotide
 UF = "GCC" + seq.seq[:40]

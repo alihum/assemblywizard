@@ -11,7 +11,7 @@ They are all designed to be run in the linux terminal.
 ##Code Example
 ###PySlice
 
-PySlice is designed to import a sequence as a fasta file and run a restriction digest on it with either a pre-defined or user defined restriction enzyme. This is useful for looking at the sticky ends produced in each fragment. It also tells you the strand length so DNA examples can be identified using gel electrophoresis.
+PySlice is designed to import a sequence as a fasta file and run a restriction digest on it with either a pre-defined or user defined restriction enzyme. The program only works with Type II restriction enzymes. This is useful for looking at the sticky ends produced in each fragment. It also tells you the strand length so DNA examples can be identified using gel electrophoresis.
 
 The program is run in the terminal by typing python before it.
 
@@ -55,7 +55,7 @@ python PySlice.py RestrictionExample.fasta new -d
 
 The terminal will prompt you to input the information for a new enzyme.
 
-New enzymes can be manually added to 'renz' dictionary on line 141 in the format `"key":"enzymename","recognitionsequence",cutindex`. This is useful if you are using an enzyme repeatedly.
+New enzymes can be manually added to 'renz' dictionary on line 166 in the format `"key":"enzymename","recognitionsequence",cutindex`. This is useful if you are using an enzyme repeatedly.
 
 ###biobricker
 

@@ -1,3 +1,45 @@
+#!/usr/bin/python
+"""
+biobricker is a script for producing biobricks from DNA sequences and \
+converting biobricks to normal DNA sequences. It is based on the RFC10 \
+recommendation from the BioBrick Foundation for making universally compatible\
+DNA parts. More information can be found at:\
+ [http://parts.igem.org/Help:Standards/Assembly/RFC10]
+
+The program is run in the linux terminal by writing python before it.
+
+The command should be typed as:
+
+python biobricker.py <filename> [-b,-d]
+
+The file must be a fasta file.
+
+The options in the command line are:
+
+`-b` Produces a BioBrick from a DNA sequence
+`-d` Produces a normal DNA sequence from a BioBrick
+
+Example:
+
+To convert a DNA sequence into a BioBrick we will use the "rhodopsin.fasta" \
+sequence which we want to convert to a BioBrick. To do this we type:
+
+```
+python biobricker.py rhodopsin.fasta -b
+```
+
+This outputs the sequence as a BioBrick into the terminal.
+
+To convert the other way from BioBrick to normal sequence we will use\
+ the "biobrick.fasta" file which contains the rhodopsin sequnce with a \
+ BioBrick prefix and suffix. To do this type:
+```
+python biobricker.py biobrick.fasta -d
+```
+
+This ouputs the sequence without the prefix and suffix.
+"""
+
 # imports the argparse and SeqIO modules
 # argparse is used to detect command line arguments
 # SeqIO allows you to parse DNA files
@@ -5,7 +47,11 @@ import argparse
 from Bio import SeqIO
 
 #sets up a parser to run in the command line
-parser = argparse.ArgumentParser(description="This program makes sequences into BioBricks and turns BioBricks into normal sequences")
+parser = argparse.ArgumentParser(description="biobricker is a script for \
+producing biobricks from DNA sequences and converting biobricks to normal DNA \
+sequences. It is based on the RFC10 recommendation from the BioBrick\
+ Foundation for making universally compatible DNA parts. More information\
+ can be found at: [http://parts.igem.org/Help:Standards/Assembly/RFC10]")
 
 # this allows a file name to be specified in the command line
 parser.add_argument('filename',
