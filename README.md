@@ -13,6 +13,13 @@ They are all designed to be run in the linux terminal.
 
 PySlice is designed to import a sequence as a fasta file and run a restriction digest on it with either a pre-defined or user defined restriction enzyme. The program only works with Type II restriction enzymes. This is useful for looking at the sticky ends produced in each fragment. It also tells you the strand length so DNA examples can be identified using gel electrophoresis.
 
+Help can be accessed by typing:
+
+```
+python PySlice.py -h
+```
+
+
 The program is run in the terminal by typing python before it.
 
 The command should be typed as:
@@ -60,6 +67,13 @@ New enzymes can be manually added to 'renz' dictionary on line 166 in the format
 ###biobricker
 
 biobricker is a script for producing biobricks from DNA sequences and converting biobricks to normal DNA sequences. It is based on the RFC10 recommendation from the BioBrick Foundation for making universally compatible DNA parts. More information can be found at: [http://parts.igem.org/Help:Standards/Assembly/RFC10]
+
+Help can be accessed by typing:
+
+```
+python biobricker.py -h
+```
+
 
 The program is run in the linux terminal by writing python before it.
 
@@ -121,4 +135,6 @@ The output prints the oligonucleotides that need to be produced. It also shows w
 ##Installation
 The scripts can be found at [https://github.com/alihum/assemblywizard].
 
+##Version control
+The version history of the project is stored in the .git directory.
 
